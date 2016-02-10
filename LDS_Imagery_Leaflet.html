@@ -5,7 +5,8 @@
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
   <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.3/proj4.js"></script>
- <script src="http://rawgit.com/kartena/Proj4Leaflet/master/src/proj4leaflet.js"></script> 
+ <script src="http://rawgit.com/kartena/Proj4Leaflet/master/src/proj4leaflet.js"></script>
+ <script src="/leaflet-ajax-gh-pages/dist/leaflet.ajax.min.js"></script>
   </head>
  <body>
   <div id="map"></div> 
@@ -53,6 +54,9 @@ var map = new L.Map('map', {
 var tilelayer = new L.TileLayer(urlTemplate, settings);
 map.addLayer(tilelayer);
 
-map.setView([-40.852931, 172.762057], 2);
+var geojsonLayer = new L.GeoJSON.AJAX("./TestData/Track.geojson");       
+geojsonLayer.addTo(map);
+
+map.setView([-38, 176], 8);
 </script> 
 </html>
