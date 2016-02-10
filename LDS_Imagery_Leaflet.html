@@ -6,7 +6,7 @@
   <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.3/proj4.js"></script>
  <script src="http://rawgit.com/kartena/Proj4Leaflet/master/src/proj4leaflet.js"></script>
- <script src="/leaflet-ajax-gh-pages/dist/leaflet.ajax.min.js"></script>
+ <script src="./leaflet-ajax-gh-pages/dist/leaflet.ajax.min.js"></script>
   </head>
  <body>
   <div id="map"></div> 
@@ -54,9 +54,17 @@ var map = new L.Map('map', {
 var tilelayer = new L.TileLayer(urlTemplate, settings);
 map.addLayer(tilelayer);
 
-var geojsonLayer = new L.GeoJSON.AJAX("./TestData/Track.geojson");       
-geojsonLayer.addTo(map);
+function popUp(f,l){
+    var out = [];
+    if (f.properties){
+        for(key in f.properties){
+            out.push(key+": "+f.properties[key]);
+        }
+        l.bindPopup(out.join("<br />"));
+    }
+}
+var geojsonLayers = new L.GeoJSON.AJAX(["./TestData/Track.geojson","./TestData/SoS.geojson"],{onEachFeature:popUp}).addTo(map);
 
-map.setView([-38, 176], 8);
+map.setView([-38.654394, 175.851509], 8);
 </script> 
 </html>
